@@ -10,3 +10,7 @@ body {
 .container {
     padding-bottom: 10px;
 }
+
+.center-block {
+    float: none;
+}
