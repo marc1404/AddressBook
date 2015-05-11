@@ -19,7 +19,7 @@ import java.util.Map;
 public class SaveAddress extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if(!request.isUserInRole("admin")){
+        if(!request.isUserInRole("admin") && !request.isUserInRole("admin7")){
             response.sendError(401);
             return;
         }
@@ -74,9 +74,18 @@ public class SaveAddress extends HttpServlet {
             return;
         }
 
+        String postCode = params.get("postcode");
+
+        if(request.isUserInRole("admin7")){
+            if(!postCode.startsWith("7")){
+                sendErrorRedirect(request, response, "Die Postleitzahl muss im Bereich 70000 bis 79999 liegen!");
+                return;
+            }
+        }
+
         Name name = new Name(params.get("addressForm"), params.get("christianName"), params.get("name"));
         Street street = new Street(params.get("street"), number);
-        City city = new City(params.get("postcode"), params.get("city"));
+        City city = new City(postCode, params.get("city"));
         String country = params.get("country");
         Location location = new Location(street, city, country);
         ContactDetails contactDetails = new ContactDetails(params.get("email"), params.get("phone"), params.get("mobile"));

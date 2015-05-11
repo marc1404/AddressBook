@@ -4,6 +4,7 @@ import com.vornetran.marc.database.Database;
 import com.vornetran.marc.database.Sequelize;
 import com.vornetran.marc.models.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.sql.*;
 
 /**
@@ -93,6 +94,18 @@ public class Address {
         }catch(SQLException ex){
             ex.printStackTrace();
         }
+    }
+
+    public boolean canEdit(HttpServletRequest request){
+        if(request.isUserInRole("admin")){
+            return true;
+        }
+
+        if(request.isUserInRole("admin7")){
+            return this.location.city.postCode.startsWith("7");
+        }
+
+        return false;
     }
 
     public Integer getId(){

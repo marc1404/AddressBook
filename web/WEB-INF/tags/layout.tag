@@ -22,7 +22,7 @@
     </head>
     <body>
         <c:if test="${ pageContext.request.remoteUser != null }">
-            <a href="/logout" class="logout">Logout</a>
+            <a href="/logout" class="logout">Abmelden</a>
         </c:if>
         <div class="container">
             <jsp:doBody/>

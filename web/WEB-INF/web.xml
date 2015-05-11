@@ -6,7 +6,8 @@
     <welcome-file-list>
         <welcome-file>AddressList.jsp</welcome-file>
     </welcome-file-list>
-    <security-role><role-name>user</role-name></security-role>
+    <security-role><role-name>guest</role-name></security-role>
+    <security-role><role-name>admin7</role-name></security-role>
     <security-role><role-name>admin</role-name></security-role>
     <security-constraint>
         <web-resource-collection>
@@ -14,7 +15,8 @@
             <url-pattern>/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
-            <role-name>user</role-name>
+            <role-name>guest</role-name>
+            <role-name>admin7</role-name>
             <role-name>admin</role-name>
         </auth-constraint>
         <user-data-constraint>

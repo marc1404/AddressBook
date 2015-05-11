@@ -40,7 +40,7 @@ ${address.read()}
                 </div>
                 <hr/>
                 <a href="/AddressList.jsp" class="btn btn-default">Zurück</a>
-                <c:if test="${ pageContext.request.isUserInRole('admin') }">
+                <c:if test="${ address.canEdit(pageContext.request) }">
                     <a href="/AddressForm.jsp?id=${param.id}" class="btn btn-primary">Bearbeiten</a>
                     <button type="button" class="btn btn-danger pull-right" data-id="${address.id}" data-delete data-redirect="/AddressList.jsp">Löschen</button>
                 </c:if>

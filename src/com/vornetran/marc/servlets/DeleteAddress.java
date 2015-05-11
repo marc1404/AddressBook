@@ -18,7 +18,7 @@ public class DeleteAddress extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {}
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if(!request.isUserInRole("admin")){
+        if(!request.isUserInRole("admin") && !request.isUserInRole("admin7")){
             response.sendError(401);
             return;
         }
@@ -41,6 +41,11 @@ public class DeleteAddress extends HttpServlet {
         }
 
         Address address = new Address(id);
+
+        if(!address.canEdit(request)){
+            response.sendError(401);
+            return;
+        }
 
         address.delete();
         response.sendRedirect("/AddressList.jsp");

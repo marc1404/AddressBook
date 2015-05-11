@@ -21,14 +21,12 @@
     </div>
     <div class="row">
         <c:choose>
-            <c:when test="${ pageContext.request.isUserInRole('admin') }">
+            <c:when test="${ pageContext.request.isUserInRole('admin') || pageContext.request.isUserInRole('admin7') }">
                 <div class="col-xs-9 col-md-10">
                     <jsp:include page="WEB-INF/includes/search.html"></jsp:include>
                 </div>
                 <div class="col-xs-3 col-md-2">
-                    <c:if test="${ pageContext.request.isUserInRole('admin') }">
-                        <a href="/AddressForm.jsp" class="btn btn-success btn-block">Neu</a>
-                    </c:if>
+                    <a href="/AddressForm.jsp" class="btn btn-success btn-block">Neu</a>
                 </div>
             </c:when>
             <c:otherwise>
@@ -57,7 +55,7 @@
           <div class="col-xs-4">
             <div class="pull-right">
                 <a href="/Address.jsp?id=${address.id}" class="btn btn-default btn-xs btn-block">Details</a><br>
-                <c:if test="${ pageContext.request.isUserInRole('admin') }">
+                <c:if test="${ address.canEdit(pageContext.request) }">
                     <button type="button" class="btn btn-danger btn-xs btn-block" data-id="${address.id}" data-delete data-redirect="reload">Löschen</button><br>
                 </c:if>
             </div>
