@@ -14,3 +14,9 @@ body {
 .center-block {
     float: none;
 }
+
+.logout {
+    position: fixed;
+    top: 5px;
+    right: 10px;
+}

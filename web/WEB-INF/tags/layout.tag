@@ -8,6 +8,7 @@
 <%@tag description="layout" pageEncoding="UTF-8"%>
 <%@attribute name="title" fragment="true" %>
 <%@attribute name="js" fragment="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html>
     <head>
@@ -20,6 +21,9 @@
         <link href="css/custom.css" rel="stylesheet">
     </head>
     <body>
+        <c:if test="${ pageContext.request.remoteUser != null }">
+            <a href="/logout" class="logout">Logout</a>
+        </c:if>
         <div class="container">
             <jsp:doBody/>
         </div>
