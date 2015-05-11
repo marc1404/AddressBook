@@ -18,6 +18,11 @@ public class DeleteAddress extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {}
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if(!request.isUserInRole("admin")){
+            response.sendError(401);
+            return;
+        }
+
         String paramId = request.getParameter("id");
 
         if(paramId == null) {

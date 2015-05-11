@@ -19,6 +19,11 @@ import java.util.Map;
 public class SaveAddress extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if(!request.isUserInRole("admin")){
+            response.sendError(401);
+            return;
+        }
+
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
 
@@ -27,7 +32,7 @@ public class SaveAddress extends HttpServlet {
 
         for(String paramName:paramNames){
             String param = request.getParameter(paramName);
-            System.out.println(paramName + " = " + param);
+
             if(param == null && !paramName.equals("id")){
                 sendErrorRedirect(request, response, "Alle Felder müssen ausgefüllt werden!");
                 return;
