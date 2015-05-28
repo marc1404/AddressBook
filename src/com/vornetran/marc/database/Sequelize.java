@@ -17,8 +17,8 @@ public class Sequelize {
         }
 	}
 
-	public Sequelize(String database, String username, String password) throws Exception {
-		this.connection = DriverManager.getConnection("jdbc:mysql://localhost/" + database, username, password);
+	public Sequelize(String host, String database, String username, String password) throws Exception {
+		this.connection = DriverManager.getConnection("jdbc:mysql://" + host + "/" + database, username, password);
 	}
 
 	public PreparedStatement prepare(String sql) throws SQLException {

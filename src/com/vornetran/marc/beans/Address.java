@@ -3,6 +3,8 @@ package com.vornetran.marc.beans;
 import com.vornetran.marc.database.Database;
 import com.vornetran.marc.database.Sequelize;
 import com.vornetran.marc.models.*;
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.*;
@@ -170,12 +172,12 @@ public class Address {
 
     private void readRow(ResultSet result) throws SQLException {
         this.id = result.getInt("id");
-        this.name = new Name(result.getString("addressform"), result.getString("christianname"), result.getString("name"));
-        Street street = new Street(result.getString("street"), result.getInt("number"));
-        City city = new City(result.getString("postcode"), result.getString("city"));
-        String country = result.getString("country");
+        this.name = new Name(escape(result, "addressform"), escape(result, "christianname"), escape(result, "name"));
+        Street street = new Street(escape(result, "street"), result.getInt("number"));
+        City city = new City(escape(result, "postcode"), escape(result, "city"));
+        String country = escape(result, "country");
         this.location = new Location(street, city, country);
-        this.contactDetails = new ContactDetails(result.getString("email"), result.getString("phone"), result.getString("mobile"));
+        this.contactDetails = new ContactDetails(escape(result, "email"), escape(result, "phone"), escape(result, "mobile"));
         this.birthday = new Birthday(result.getDate("birthday"));
         this.exists = true;
     }
@@ -242,6 +244,10 @@ public class Address {
             ex.printStackTrace();
             return false;
         }
+    }
+
+    private String escape(ResultSet result, String column) throws SQLException {
+        return StringEscapeUtils.escapeHtml4(result.getString(column));
     }
 
 }

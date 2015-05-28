@@ -10,7 +10,7 @@ public class Database {
     public static Sequelize get(){
         if(sequelize == null){
             try {
-                sequelize = new Sequelize("addressbook", "root", "root");
+                sequelize = new Sequelize("10.35.4.24", "addressbook", "smcdba", "smcdba");
             }catch(Exception ex){
                 ex.printStackTrace();
             }
